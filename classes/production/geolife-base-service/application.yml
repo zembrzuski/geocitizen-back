@@ -1,1 +1,17 @@
 elasticsearch_url: http://dev-online-elasticsearch01-poa.rbs.com.br:9200/zem-teste/group
+
+find_by_term:
+  "{
+    \"query\": {
+      \"bool\": {
+        \"filter\": [
+          {
+            \"term\": {
+              \"%s\": \"%s\"
+            }
+          }
+        ]
+      }
+    },
+    \"size\": 5000
+  }"
