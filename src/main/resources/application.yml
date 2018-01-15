@@ -1,4 +1,4 @@
-elasticsearch_url: http://dev-online-elasticsearch01-poa.rbs.com.br:9200/zem-teste/group
+elasticsearch_url: http://localhost:9200/geolife_one/group
 
 find_by_term:
   "{

@@ -1,9 +1,10 @@
 package com.zembrzuski.geolife.baseservice;
 
 import com.zembrzuski.geolife.baseservice.entity.geolife.Track;
-import com.zembrzuski.geolife.baseservice.frontend.Coordinates;
+import com.zembrzuski.geolife.baseservice.frontend.Point;
 import com.zembrzuski.geolife.baseservice.frontend.Path;
 import com.zembrzuski.geolife.baseservice.services.FromElasticToCoordinates;
+import com.zembrzuski.geolife.baseservice.services.FromTrackToPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -26,20 +27,17 @@ public class TrackController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private FromElasticToCoordinates fromElasticToCoordinates;
+    private FromTrackToPath fromTrackToPath;
 
     @RequestMapping(value = "/by-id/{trackId}", method = RequestMethod.GET)
     public ResponseEntity<Path> retrieveTrackById(@PathVariable String trackId) {
         Track elasticResponse = restTemplate.getForObject(elasticsearchUrl + "/" + trackId, Track.class);
 
-        List<Coordinates> coordinatesToRespond = fromElasticToCoordinates.fromElasticToCoordinates(elasticResponse);
-
         return ResponseEntity
                 .ok()
                 .header("Cache", "no-cache")
                 .header("header2", "value2")
-                .body(new Path(coordinatesToRespond))
-                ;
+                .body(fromTrackToPath.execute(elasticResponse));
     }
 
 }
