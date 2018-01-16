@@ -1,10 +1,8 @@
 package com.zembrzuski.geolife.baseservice;
 
 import com.zembrzuski.geolife.baseservice.entity.geolife.ElasticResponse;
-import com.zembrzuski.geolife.baseservice.entity.geolife.Track;
 import com.zembrzuski.geolife.baseservice.frontend.Path;
 import com.zembrzuski.geolife.baseservice.frontend.Paths;
-import com.zembrzuski.geolife.baseservice.services.FromElasticToCoordinates;
 import com.zembrzuski.geolife.baseservice.services.FromTrackToPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
