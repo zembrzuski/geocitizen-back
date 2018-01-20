@@ -1,15 +1,18 @@
 package com.zembrzuski.geolife.baseservice.frontend;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
+
 import java.util.List;
 
 public class Path {
 
     private final String id;
     private final List<Point> points;
-    private final String firstTimestamp;
-    private final String lastTimestamp;
+    private final DateTime firstTimestamp;
+    private final DateTime lastTimestamp;
 
-    public Path(String id, List<Point> points, String firstTimestamp, String lastTimestamp) {
+    public Path(String id, List<Point> points, DateTime firstTimestamp, DateTime lastTimestamp) {
         this.id = id;
         this.points = points;
         this.firstTimestamp = firstTimestamp;
@@ -24,11 +27,11 @@ public class Path {
         return points;
     }
 
-    public String getFirstTimestamp() {
+    public DateTime getFirstTimestamp() {
         return firstTimestamp;
     }
 
-    public String getLastTimestamp() {
+    public DateTime getLastTimestamp() {
         return lastTimestamp;
     }
 }

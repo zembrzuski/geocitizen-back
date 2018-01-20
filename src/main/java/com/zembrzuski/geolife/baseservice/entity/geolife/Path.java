@@ -1,11 +1,15 @@
 package com.zembrzuski.geolife.baseservice.entity.geolife;
 
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.joda.time.DateTime;
+
 public class Path {
 
     private Point point;
-    // TODO muito ruim o timestamp com string. Mas, por ora, nao preciso disso.
-    // o ideal eh serializar esse cara bem bonito com resttemplate e jackson.
-    private String timestamp;
+
+    //@JsonDeserialize(using = CustomDateDeserializer.class)
+    private DateTime timestamp;
     private String mode;
 
     public Point getPoint() {
@@ -16,11 +20,11 @@ public class Path {
         this.point = point;
     }
 
-    public String getTimestamp() {
+    public DateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(DateTime timestamp) {
         this.timestamp = timestamp;
     }
 
