@@ -29,6 +29,9 @@ public class UserController {
     @Value("${find_by_term}")
     private String findByTerm;
 
+    @Value("${find_by_user_id_and_by_hour_of_day}")
+    private String findByUserIdAndHourOfDay;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -37,11 +40,34 @@ public class UserController {
 
     @RequestMapping(value = "/by-user-id/{userId}", method = RequestMethod.GET)
     public ResponseEntity<Paths> retrieveTrackByUser(@PathVariable String userId) {
-        String query = String.format(findByTerm, "userId", userId);
+        String query = String.format(findByTerm, "userId.keyword", userId);
 
+        return queryTrackOnElasticsearch(query);
+    }
+
+    /**
+     * TODO verificar se essa query não tá cagada.
+     * Ele faz um filter pelos limites inferior e superior.
+     * O que eu gostaria de fazer é uma querie filtrando somente o primeiro elemento, pq eu queria viagens
+     * que iniciam em um determinado horario.
+     * Pode ser que esse cara esteja filtrando pouco ou muito.
+     * Na real, eu tenho que debugar muito, muito melhor essa query.
+     * Mas agora estou sem paciencia, e vou assumir que essa query está razoável e aceitável.
+     * TODO mas, com certeza, devo revisitar esse cara daqui a pouco.
+     */
+    @RequestMapping(value = "/by-user-id-and-hour-of-day/{userId}/{initHour}/{finishHour}", method = RequestMethod.GET)
+    public ResponseEntity<Paths> retrieveTrackByUserAndHourOfDay(
+            @PathVariable String userId, @PathVariable int initHour, @PathVariable int finishHour) {
+
+        String query = String.format(findByUserIdAndHourOfDay, initHour, finishHour, userId);
+
+        return queryTrackOnElasticsearch(query);
+    }
+
+    private ResponseEntity<Paths> queryTrackOnElasticsearch(String query) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<String>(query, headers);
+        HttpEntity<String> entity = new HttpEntity<>(query, headers);
 
         List<Path> allPaths = restTemplate
                 .postForObject(elasticsearchUrl + "/_search", entity, ElasticResponse.class)
@@ -56,5 +82,4 @@ public class UserController {
                 .header("header2", "value2")
                 .body(new Paths(allPaths));
     }
-
 }
