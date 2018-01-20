@@ -15,3 +15,26 @@ find_by_term:
     },
     \"size\": 5000
   }"
+
+find_by_user_id_and_by_hour_of_day:
+  "{
+     \"query\": {
+       \"bool\": {
+         \"must\": [
+           {
+             \"script\": {
+               \"script\": \"doc['path.timestamp'].value.getHourOfDay() > %s && doc['path.timestamp'].value.getHourOfDay() < %s\"
+             }
+           },
+           {
+             \"term\": {
+               \"userId.keyword\": {
+                 \"value\": \"%s\"
+               }
+             }
+           }
+         ]
+       }
+     },
+      \"size\": 5000
+   }"
