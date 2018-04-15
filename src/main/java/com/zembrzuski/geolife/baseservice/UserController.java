@@ -41,7 +41,8 @@ public class UserController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<String>(query, headers);
+        HttpEntity<String> entity = new HttpEntity<>(query, headers);
+
 
         List<Path> allPaths = restTemplate
                 .postForObject(elasticsearchUrl + "/_search", entity, ElasticResponse.class)
