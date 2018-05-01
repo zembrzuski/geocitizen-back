@@ -22,11 +22,11 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile group: 'com.google.guava', name: 'guava', version: '23.1-jre'
 	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
