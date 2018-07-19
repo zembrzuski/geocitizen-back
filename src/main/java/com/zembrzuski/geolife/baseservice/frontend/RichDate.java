@@ -2,17 +2,20 @@ package com.zembrzuski.geolife.baseservice.frontend;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import lombok.Getter;
 
-@Getter
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Data
 public class RichDate {
 
     private static final SimpleDateFormat DIA_DA_SEMANA_FORMATTER = new SimpleDateFormat("EE");
     private static final SimpleDateFormat HORA_FORMATTER = new SimpleDateFormat("HH");
 
-    private final Date firstTimestamp;
-    private final String diaDaSemana;
-    private final String hora;
+    private Date firstTimestamp;
+    private String diaDaSemana;
+    private String hora;
 
     RichDate(Date firstTimestamp) {
         this.firstTimestamp = firstTimestamp;

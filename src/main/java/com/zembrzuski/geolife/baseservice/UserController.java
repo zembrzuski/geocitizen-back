@@ -81,5 +81,6 @@ public class UserController {
                 .header("Cache", "no-cache")
                 .header("header2", "value2")
                 .body(new Paths(allPaths));
+
     }
 }

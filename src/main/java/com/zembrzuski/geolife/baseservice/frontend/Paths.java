@@ -1,7 +1,12 @@
 package com.zembrzuski.geolife.baseservice.frontend;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 public class Paths {
 
     private List<Path> paths;
@@ -10,11 +15,4 @@ public class Paths {
         this.paths = paths;
     }
 
-    public List<Path> getPaths() {
-        return paths;
-    }
-
-    public void setPaths(List<Path> paths) {
-        this.paths = paths;
-    }
 }

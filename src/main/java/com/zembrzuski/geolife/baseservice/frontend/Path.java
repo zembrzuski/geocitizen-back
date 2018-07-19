@@ -1,14 +1,19 @@
 package com.zembrzuski.geolife.baseservice.frontend;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 public class Path {
 
-    private final String id;
-    private final List<Point> points;
-    private final RichDate firstTimestamp;
-    private final RichDate lastTimestamp;
+    private String id;
+    private List<Point> points;
+    private RichDate firstTimestamp;
+    private RichDate lastTimestamp;
 
     public Path(String id, List<Point> points, Date firstTimestamp, Date lastTimestamp) {
         this.id = id;
@@ -17,19 +22,4 @@ public class Path {
         this.lastTimestamp = new RichDate(lastTimestamp);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    public RichDate getFirstTimestamp() {
-        return firstTimestamp;
-    }
-
-    public RichDate getLastTimestamp() {
-        return lastTimestamp;
-    }
 }
